@@ -1,0 +1,6 @@
+<http://purl.org/saws/ontology#hasAncestor> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#TransitiveProperty> .
+<A> <http://purl.org/saws/ontology#hasAncestor> <B> .
+<B> <http://purl.org/saws/ontology#hasAncestor> <C> .
+<B> <http://purl.org/saws/ontology#hasAncestor> <D> .
+<D> <http://purl.org/saws/ontology#hasAncestor> <E> .
+<F> <http://purl.org/saws/ontology#hasAncestor> <D> .
