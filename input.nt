@@ -1,0 +1,5 @@
+<A> <http://www.w3.org/2002/07/owl#sameAs> <B> .
+<B> <http://www.w3.org/2002/07/owl#sameAs> <C> .
+<B> <http://www.w3.org/2002/07/owl#sameAs> <D> .
+<D> <http://www.w3.org/2002/07/owl#sameAs> <E> .
+<F> <http://www.w3.org/2002/07/owl#sameAs> <D> .
