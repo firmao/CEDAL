@@ -30,6 +30,15 @@ public class Main {
 		}
 	}
 	
+	public static void tPellet() {
+ 		System.out.println("==== owl:sameAs (reflexive + symmetric + transitive) ====");
+ 		MyTCPellet.closure(OWL.sameAs, new File("input_reflexive_symmetric_transitive.nt"), new File("pellet_output_reflexive_symmetric_transitive.nt"));
+ 		
+ 		System.out.println("==== saws:hasAncestor (transitive) ====");
+		Property hasAncestor = ResourceFactory.createProperty("http://purl.org/saws/ontology#hasAncestor");
+ 		MyTCPellet.closure(hasAncestor, new File("input_transitive.nt"), new File("pellet_output_transitive.nt"));
+ 	}
+ 	
 	public static void t3()
 	{
 		try {
