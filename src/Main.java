@@ -2,6 +2,10 @@ import java.io.File;
 import java.util.Map;
 import java.util.Set;
 
+import com.hp.hpl.jena.rdf.model.Property;
+import com.hp.hpl.jena.rdf.model.ResourceFactory;
+import com.hp.hpl.jena.vocabulary.OWL;
+
 public class Main {
 
 	public static void main(String[] args) {
