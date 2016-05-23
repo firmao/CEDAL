@@ -5,7 +5,7 @@ import java.util.Set;
 public class Main {
 
 	public static void main(String[] args) {
-		t4();
+		t5();
 	}
 	
 	public static void t1()
@@ -54,6 +54,16 @@ public class Main {
 			Map<String, Set<String>> result = MyTCJena.getTC("input.nt");
 			System.out.println("Output: " + result);
 			MyTC.generateFile(result, "outputJena.nt");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void t5()
+	{
+		try {
+			File f = new File("correct");
+			MyTCJena.generateAllFiles(f);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
