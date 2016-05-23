@@ -135,14 +135,22 @@ public class MyTCJena {
 						.map(Path::toFile).collect(Collectors.toList());
 
 				File[] fdir = filesInFolder.stream().toArray(File[]::new);
+				File fOut = new File("closure");
+				if (!fOut.exists())
+					fOut.mkdirs();
+				
+				long startTime = System.currentTimeMillis();
+				
 				IntStream.range(0, fdir.length).parallel().forEach(id -> {
 					System.out.println("File: " + fdir[id].getName());
-					Map<String, Set<String>> result = MyTC.getTC(fdir[id]);
-					File fOut = new File("closure");
-					if (!fOut.exists())
-						fOut.mkdirs();
-					MyTC.generateFile(result, "closure\\" + fdir[id].getName());
+					Map<String, Set<String>> result = getTC(fdir[id].getAbsolutePath());
+					generateFile(result, "closure\\" + fdir[id].getName());
 				});
+				
+				long endTime = System.currentTimeMillis();
+				long totalTime = endTime - startTime;
+				
+				System.out.println("TotalTime is: " + totalTime + " milliseconds.");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
