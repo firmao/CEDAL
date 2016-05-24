@@ -66,5 +66,36 @@ public class MyTCPellet {
 		
 	}
 
+	/*
+	 * Generates the closure for all files in a directory resulting in a new directory with the new files.
+	 * @param fPath represents the path of the dump / triple files.
+	 */
+	public static void generateAllFilesPellet(File fPath) {
+		try {
+			if (fPath.isDirectory()) {
+				List<File> filesInFolder = Files.walk(Paths.get(fPath.getPath())).filter(Files::isRegularFile)
+						.map(Path::toFile).collect(Collectors.toList());
 
+				File[] fdir = filesInFolder.stream().toArray(File[]::new);
+				File fOut = new File("closurePellet");
+				if (!fOut.exists())
+					fOut.mkdirs();
+				
+				long startTime = System.currentTimeMillis();
+				
+				IntStream.range(0, fdir.length).parallel().forEach(id -> {
+					System.out.println("File: " + fdir[id].getName());
+					File output = new File("closurePellet\\" + fdir[id].getName());
+					MyTCPellet.closure(OWL.sameAs, fdir[id], output);
+				});
+				
+				long endTime = System.currentTimeMillis();
+				long totalTime = endTime - startTime;
+				
+				System.out.println("TotalTime is: " + totalTime + " milliseconds.");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }
