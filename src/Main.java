@@ -43,6 +43,16 @@ public class Main {
  		MyTCPellet.closure(hasAncestor, new File("input_transitive.nt"), new File("pellet_output_transitive.nt"));
  	}
  	
+ 	public static void allTCPellet()
+	{
+		try {
+			File f = new File("mappingDirectory");
+			MyTCPellet.generateAllFilesPellet(f);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+ 	
 	public static void t3()
 	{
 		try {
