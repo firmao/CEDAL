@@ -22,7 +22,7 @@ import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.rdf.model.StmtIterator;
 import com.hp.hpl.jena.util.FileManager;
 
-public class MyTCJena {
+public class ClosureAndre {
 	public static int cTriplesBefore = 0;
 	public static int cTriplesAfter = 0;
 	public static int totalFiles = 0;
@@ -30,42 +30,7 @@ public class MyTCJena {
 	public static Map<String, String> filesProblem = new HashMap<String, String>();
 	public static String cPredicate = null;
 
-	public static void testReadNtriple(String pathFile) {
-		Model model = ModelFactory.createDefaultModel();
-		InputStream is = FileManager.get().open(pathFile);
-		if (is != null) {
-			model.read(is, null, "N-TRIPLE");
-			ResIterator s = model.listSubjects();
-			while (s.hasNext()) {
-				System.out.println("  " + ((Resource) s.next()).getURI());
-			}
-		} else {
-			System.err.println("cannot read " + pathFile);
-			;
-		}
-	}
-
-	/*
-	 * input file: <A> <http://www.w3.org/2002/07/owl#sameAs> <B> . <B>
-	 * <http://www.w3.org/2002/07/owl#sameAs> <C> . <B>
-	 * <http://www.w3.org/2002/07/owl#sameAs> <D> . <D>
-	 * <http://www.w3.org/2002/07/owl#sameAs> <E> . <F>
-	 * <http://www.w3.org/2002/07/owl#sameAs> <D> .
-	 * 
-	 * output file: <A> <http://www.w3.org/2002/07/owl#sameAs> <B> . <A>
-	 * <http://www.w3.org/2002/07/owl#sameAs> <C> . <A>
-	 * <http://www.w3.org/2002/07/owl#sameAs> <D> . <A>
-	 * <http://www.w3.org/2002/07/owl#sameAs> <E> . <B>
-	 * <http://www.w3.org/2002/07/owl#sameAs> <C> . <B>
-	 * <http://www.w3.org/2002/07/owl#sameAs> <D> . <B>
-	 * <http://www.w3.org/2002/07/owl#sameAs> <E> . <D>
-	 * <http://www.w3.org/2002/07/owl#sameAs> <E> . <F>
-	 * <http://www.w3.org/2002/07/owl#sameAs> <D> . <F>
-	 * <http://www.w3.org/2002/07/owl#sameAs> <E> .
-	 */
-	public static Map<String, Set<String>> getTC(String pathFile) throws Exception {
-		Map<String, Set<String>> ret = getAllRelations(pathFile);
-		System.out.println("Input: " + ret);
+	public static Map<String, Set<String>> getTC(Map<String, Set<String>> ret) throws Exception {
 		for (Map.Entry<String, Set<String>> entry : ret.entrySet()) {
 			String keyplus = entry.getKey();
 			Set<String> value = entry.getValue();
@@ -80,9 +45,7 @@ public class MyTCJena {
 		return ret;
 	}
 
-	public static Map<String, Set<String>> getRC(String pathFile) throws Exception {
-		Map<String, Set<String>> ret = getAllRelations(pathFile);
-		System.out.println("Input: " + ret);
+	public static Map<String, Set<String>> getRC(Map<String, Set<String>> ret) throws Exception {
 		List<String> lstKeys = new ArrayList<String>();
 		
 		for (String key : ret.keySet()) {
@@ -105,9 +68,7 @@ public class MyTCJena {
 		return ret;
 	}
 	
-	public static Map<String, Set<String>> getSC(String pathFile) throws Exception {
-		Map<String, Set<String>> ret = getAllRelations(pathFile);
-		System.out.println("Input: " + ret);
+	public static Map<String, Set<String>> getSC(Map<String, Set<String>> ret) throws Exception {
 		List<String> lstKeys = new ArrayList<String>();
 		
 		for (String key : ret.keySet()) {
@@ -133,72 +94,7 @@ public class MyTCJena {
 		return ret;
 	}
 	
-	public static Map<String, Set<String>> getClosure(File f) throws Exception {
-		Map<String, Set<String>> ret = getAllRelations(f.getAbsolutePath());
-		//System.out.println("Input: " + ret);
-
-		return getClosure(ret);
-		
-//		// put all keys with all values(All subjects with all predicates )
-//		Map<String, Set<String>> newMap = new HashMap<String, Set<String>>();
-//		newMap.putAll(ret);
-//		for (String key : ret.keySet()) {
-//			for (String value : ret.get(key)) {
-//				if (!ret.containsKey(value))
-//					newMap.put(value, ret.get(key));
-//			}
-//		}
-//
-//		Set<String> obj = new HashSet<String>();
-//		for (String key : newMap.keySet()) {
-//			obj.add(key);
-//		}
-//
-//		for (String key : newMap.keySet()) {
-//			ret.put(key, obj);
-//		}
-//
-//		return ret;
-	}
-
 	
-	
-	private static Map<String, Set<String>> getClosure(Map<String, Set<String>> gMap) {
-		Map<String, Set<String>> rMap = new HashMap<String, Set<String>>();
-		Map<String, Set<String>> retMap = new HashMap<String, Set<String>>();
-		Map<String, Set<String>> nMap = new HashMap<String, Set<String>>();
-		for (String graph : gMap.keySet()) {
-			nMap.clear();
-			nMap.put(graph, gMap.get(graph));
-			rMap = generatesClosures(nMap);
-			retMap.putAll(rMap);
-		}
-		return retMap;
-	}
-
-	private static Map<String, Set<String>> generatesClosures(Map<String, Set<String>> ret) {
-		
-		Map<String, Set<String>> newMap = new HashMap<String, Set<String>>();
-		newMap.putAll(ret);
-		for (String key : ret.keySet()) {
-			for (String value : ret.get(key)) {
-				if (!ret.containsKey(value))
-					newMap.put(value, ret.get(key));
-			}
-		}
-
-		Set<String> obj = new HashSet<String>();
-		for (String key : newMap.keySet()) {
-			obj.add(key);
-		}
-
-		for (String key : newMap.keySet()) {
-			ret.put(key, obj);
-		}
-
-		return ret;
-	}
-
 	/*
 	 * Organize the input file in a hashMap. <uriA><owl:sameAs><uriB>
 	 * <uriB><owl:sameAs><uriC> <uriB><owl:sameAs><uriD>
@@ -272,7 +168,7 @@ public class MyTCJena {
 						.map(Path::toFile).collect(Collectors.toList());
 
 				File[] fdir = filesInFolder.stream().toArray(File[]::new);
-				File fOut = new File("closureJena");
+				File fOut = new File("closureAndre");
 				if (!fOut.exists())
 					fOut.mkdirs();
 				totalFiles = fdir.length;
@@ -282,7 +178,7 @@ public class MyTCJena {
 					try {
 						// System.out.println("File: " + fdir[id].getName());
 						Map<String, Set<String>> result = getClosure(fdir[id]);
-						generateFile(result, "closureJena\\" + fdir[id].getName());
+						generateFile(result, "closureAndre\\" + fdir[id].getName());
 					} catch (Exception e) {
 						filesProblem.put(fdir[id].getName(), e.getMessage());
 						e.printStackTrace();
@@ -293,5 +189,17 @@ public class MyTCJena {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public static Map<String, Set<String>> getClosure(File file) throws Exception {
+		
+		Map<String, Set<String>> ret = getAllRelations(file.getAbsolutePath());
+		//System.out.println("Input: " + ret);
+		
+		ret=getRC(ret);
+		ret=getSC(ret);
+		ret=getTC(ret);
+		
+		return ret;
 	}
 }

@@ -34,7 +34,7 @@ public class ObjectPropertyAxioms {
 		// IRI iri =
 		// IRI.create("http://swat.cse.lehigh.edu/onto/univ-bench.owl");
 		// String ontologyFile = "./ontology/univ-bench-dl.owl";
-		String ontologyFile = "./ontology/rdf-schema.owl";
+		String ontologyFile = "./ontology/skos.rdf";
 		// OWLOntology onlineOntology = loadOnlineOntology(iri);
 		OWLOntology localOntology = loadLocalOntology(ontologyFile);
 		// System.out.println( );
@@ -67,6 +67,11 @@ public class ObjectPropertyAxioms {
 		}
 		for (OWLObjectPropertyExpression prop : localOntology.getObjectPropertiesInSignature()) {
 
+			System.out.println("Prop: " + prop.toString());
+			System.out.println("Prop transitive: " + prop.isTransitive(localOntology));
+			System.out.println("Prop reflexive: " + prop.isReflexive(localOntology));
+			System.out.println("Prop symmetric: " + prop.isSymmetric(localOntology));
+			
 			// if(!getInverseObjectProperties(reasoner,prop).isEmpty())
 			// System.out.println(prop+" has inverses
 			// :"+getInverseObjectProperties(reasoner,prop));
@@ -104,10 +109,10 @@ public class ObjectPropertyAxioms {
 			// prop.getDisjointProperties(localOntology));
 			// }
 			//
-			 if(isSymmetric(prop,localOntology))
-			 System.out.println(prop +" is symmetric");
-			 if(isReflexive(prop,localOntology))
-			 System.out.println(prop +" is Reflexive");
+			// if(isSymmetric(prop,localOntology))
+			// System.out.println(prop +" is symmetric");
+			// if(isReflexive(prop,localOntology))
+			// System.out.println(prop +" is Reflexive");
 
 		}
 	}
@@ -148,7 +153,7 @@ public class ObjectPropertyAxioms {
 	}
 
 	public static boolean isReflexive(OWLObjectPropertyExpression prop, OWLOntology localOntology) {
-		
+
 		if (prop.isReflexive(localOntology))
 			return true;
 		// System.out.println(prop + " is reflexive" );

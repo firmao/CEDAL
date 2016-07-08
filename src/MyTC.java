@@ -14,6 +14,11 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class MyTC {
+	public static int cTriplesBefore = 0;
+	public static int cTriplesAfter = 0;
+	public static int totalFiles = 0;
+	public static long totalTime = 0;
+	public static Map<String, String> filesProblem = new HashMap<String, String>();
 
 	/*
 	 * input file: <A> <http://www.w3.org/2002/07/owl#sameAs> <B> . <B>
@@ -35,7 +40,7 @@ public class MyTC {
 	 */
 	public static Map<String, Set<String>> getTC(File f) {
 		Map<String, Set<String>> ret = getAllRelations(f);
-		//System.out.println("Input: " + ret);
+		// System.out.println("Input: " + ret);
 		for (Map.Entry<String, Set<String>> entry : ret.entrySet()) {
 			String keyplus = entry.getKey();
 			Set<String> value = entry.getValue();
@@ -45,6 +50,32 @@ public class MyTC {
 						ret.get(keyplus).add(elem);
 				}
 			}
+		}
+
+		return ret;
+	}
+
+	public static Map<String, Set<String>> getClosure(File f) {
+		Map<String, Set<String>> ret = getAllRelations(f);
+		// System.out.println("Input: " + ret);
+
+		// put all keys with all values(All subjects with all predicates )
+		Map<String, Set<String>> newMap = new HashMap<String, Set<String>>();
+		newMap.putAll(ret);
+		for (String key : ret.keySet()) {
+			for (String value : ret.get(key)) {
+				if (!ret.containsKey(value))
+					newMap.put(value, ret.get(key));
+			}
+		}
+
+		Set<String> obj = new HashSet<String>();
+		for (String key : newMap.keySet()) {
+			obj.add(key);
+		}
+
+		for (String key : newMap.keySet()) {
+			ret.put(key, obj);
 		}
 
 		return ret;
@@ -67,6 +98,7 @@ public class MyTC {
 
 		try (BufferedReader br = new BufferedReader(new FileReader(f))) {
 			while (((line = br.readLine()) != null)) {
+				cTriplesBefore++;
 				uri1 = line.substring(1, line.indexOf('>'));
 				uri2 = line.substring(line.lastIndexOf('<') + 1, line.lastIndexOf('>'));
 				if (ret.containsKey(uri1)) {
@@ -78,6 +110,7 @@ public class MyTC {
 				}
 			}
 		} catch (Exception e) {
+			filesProblem.put(f.getName(),e.getMessage());
 			e.printStackTrace();
 		}
 
@@ -91,6 +124,7 @@ public class MyTC {
 				for (String value : result.get(key)) {
 					String elem = "<" + key + "> <http://www.w3.org/2002/07/owl#sameAs> <" + value + "> .";
 					writer.println(elem);
+					cTriplesAfter++;
 				}
 			}
 			writer.close();
@@ -104,18 +138,56 @@ public class MyTC {
 			if (fPath.isDirectory()) {
 				List<File> filesInFolder = Files.walk(Paths.get(fPath.getPath())).filter(Files::isRegularFile)
 						.map(Path::toFile).collect(Collectors.toList());
-				
+
 				File[] fdir = filesInFolder.stream().toArray(File[]::new);
+				File fOut = new File("closure");
+				if (!fOut.exists())
+					fOut.mkdirs();
+				totalFiles = fdir.length;
+				final long start = System.currentTimeMillis();
+
 				IntStream.range(0, fdir.length).parallel().forEach(id -> {
-					System.out.println("File: " + fdir[id].getName());
-					Map<String, Set<String>> result = MyTC.getTC(fdir[id]);
-					File fOut = new File("closure");
-					if(!fOut.exists()) fOut.mkdirs();
-					MyTC.generateFile(result, "closure\\" + fdir[id].getName());
+					try {
+						System.out.println("File: " + fdir[id].getName());
+						Map<String, Set<String>> result = getClosure(fdir[id]);
+						generateFile(result, "closure\\" + fdir[id].getName());
+					} catch (Exception e) {
+						filesProblem.put(fdir[id].getName(),e.getMessage());
+						e.printStackTrace();
+					}
 				});
+				totalTime = System.currentTimeMillis() - start;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
+
+//	public static void generateAllFiles(File fPath, boolean noParallel) {
+//		try {
+//			if (fPath.isDirectory()) {
+//				List<File> filesInFolder = Files.walk(Paths.get(fPath.getPath())).filter(Files::isRegularFile)
+//						.map(Path::toFile).collect(Collectors.toList());
+//
+//				File fOut = new File("closure");
+//				if (!fOut.exists())
+//					fOut.mkdirs();
+//				totalFiles = filesInFolder.size();
+//				final long start = System.currentTimeMillis();
+//
+//				for (File fdir : filesInFolder) {
+//					try {
+//						System.out.println("File: " + fdir.getName());
+//						Map<String, Set<String>> result = getClosure(fdir);
+//						generateFile(result, "closure\\" + fdir.getName());
+//					} catch (Exception e) {
+//						e.printStackTrace();
+//					}
+//				}
+//				totalTime = System.currentTimeMillis() - start;
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
 }
