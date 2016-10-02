@@ -8,18 +8,35 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import parallel.ClosureGeneratorParallel;
+
 public class Main {
 	static long triples = 0;
-	public static void main(String[] args) {
+	static long timeMixFiles, timeClosures, timeErrorDetection;
+	public static void main(String[] args) throws IOException {
 		final long start = System.currentTimeMillis();
-		//File dir = new File("sameAs/s8");
-		File dir = new File("sameAs/s8_1");
+		File dir = new File("sameAs/sample");
+		//File dir = new File("sameAs/s1000");
+		//File dir = new File("sameAs/s500000");
+		//File dir = new File("sameAs/s100000");
+		//File dir = new File("sameAs/s1000000");
+		//printNTriples(dir);
 		String predicate = "http://www.w3.org/2002/07/owl#sameAs";
 		tClosure(predicate, dir);
-		final long totalTime = System.currentTimeMillis() - start;
+		//final long totalTime = System.currentTimeMillis() - start;
 		final String fileName = "summarizarion_" + dir.getName().split("\\\\")[0] + ".txt";
 		Set<String> txtContent = new HashSet<String>();
-		txtContent.add("TotalTime: " + totalTime + "ms");
+		txtContent.add("TotalTime(MixFiles): " + timeMixFiles + " ms");
+		
+		timeClosures = ClosureGenerator.timeRC+ClosureGenerator.timeSC+ClosureGenerator.timeTC;
+		txtContent.add("TotalTime(Closures): " + timeClosures + " ms");
+		txtContent.add("TotalTime(RC): " + ClosureGenerator.timeRC + " ms");
+		txtContent.add("TotalTime(SC): " + ClosureGenerator.timeSC + " ms");
+		txtContent.add("TotalTime(TC): " + ClosureGenerator.timeTC + " ms");
+		txtContent.add("TotalTime(ErrorDetection): " + timeErrorDetection + " ms");
+		final long totalTime = timeMixFiles + timeErrorDetection+timeClosures;
+		
+		txtContent.add("TotalTime: " + totalTime + " ms");
 		txtContent.add("Triples: " + triples);
 		ClosureGenerator.generateFile(txtContent, fileName);
 	}
@@ -36,10 +53,18 @@ public class Main {
 					setFiles.add(files[i]);
 					setFiles.add(files[j]);
 					try {
+						long start = System.currentTimeMillis();
 						File f = ClosureGenerator.mixFiles(setFiles);
+						timeMixFiles += System.currentTimeMillis() - start;
+						
+						//start = System.currentTimeMillis();
 						result = ClosureGenerator.getClosure(f);
+						//timeClosures += System.currentTimeMillis() - start;
+						
 						//ClosureGenerator.generateFile(result, output);
+						start = System.currentTimeMillis();
 						ErrorDetection.analyse(result);
+						timeErrorDetection += System.currentTimeMillis() - start;
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
@@ -60,5 +85,14 @@ public class Main {
 					.collect(Collectors.toSet());
 		}
 		return setFiles;
+	}
+	
+	private static void printNTriples(File dir) throws IOException
+	{
+		File[] files = getFiles(dir).stream().toArray(File[]::new);
+		for (int i = 0; i < files.length; i++) {
+			triples += ErrorDetection.getTriples(files[i].getAbsolutePath());
+		}
+		System.out.println("Dir: " + dir.getName() + " has " + triples + " triples.");
 	}
 }

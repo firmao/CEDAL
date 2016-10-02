@@ -33,7 +33,7 @@ public class ClosureGenerator {
 	public static Map<String, String> filesProblem = new HashMap<String, String>();
 	public static String cPredicate = null;
 	public static Map<String, Set<String>> datasets = new HashMap<String, Set<String>>();
-
+	public static long timeRC, timeSC, timeTC;
 	public static Map<String, Set<String>> getTC(Map<String, Set<String>> ret) throws Exception {
 		for (Map.Entry<String, Set<String>> entry : ret.entrySet()) {
 			String keyplus = entry.getKey();
@@ -265,10 +265,17 @@ public class ClosureGenerator {
 		Map<String, Set<String>> ret = getAllRelations(file);
 		//System.out.println("Input: " + ret);
 		
+		long start = System.currentTimeMillis();
 		ret=getRC(ret);
-		ret=getSC(ret);
-		ret=getTC(ret);
+		timeRC += System.currentTimeMillis() - start;
 		
+		start = System.currentTimeMillis();
+		ret=getSC(ret);
+		timeSC += System.currentTimeMillis() - start;
+		
+		start = System.currentTimeMillis();
+		ret=getTC(ret);
+		timeTC += System.currentTimeMillis() - start;
 		return ret;
 	}
 }
