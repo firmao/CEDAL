@@ -19,7 +19,7 @@ public class LinksetConverter {
 
 	public static void main(String args[]) throws IOException {
 		Set<String> rTriples = new HashSet<String>();
-		File dir = new File("lustre");
+		File dir = new File(args[0]);
 		Set<File> files = getFiles(dir);
 		//files.stream().forEach(file -> {
 		for(File file : files){
