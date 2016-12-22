@@ -21,6 +21,7 @@ public class LinksetConverter {
 	* use like:
 	* LinksetConverter dirLustreFiles
 	* --The new linksets will be stored in a new directory called nLustre.
+	* The directory nLustre should be created in advance.
 	*/
 	public static void main(String args[]) throws IOException {
 		Set<String> rTriples = new HashSet<String>();
