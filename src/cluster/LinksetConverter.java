@@ -22,6 +22,7 @@ public class LinksetConverter {
 	* LinksetConverter dirLustreFiles
 	* --The new linksets will be stored in a new directory called nLustre.
 	* The directory nLustre should be created in advance.
+	* Files from Lustre: https://github.com/firmao/CEDAL/blob/master/lustre_linksets.nt.zip
 	*/
 	public static void main(String args[]) throws IOException {
 		Set<String> rTriples = new HashSet<String>();
