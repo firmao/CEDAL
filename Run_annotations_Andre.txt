@@ -1,0 +1,20 @@
+To run:
+java -jar runclosures.jar
+
+Requirements:
+-Java 8;
+-The directory that contains all sameAs mappings (files.nt) from linkLion is: /sameAs/s1000/
+
+run on ServerAKSW:
+java -Xmx128G -jar runclustersGood.jar > log.txt &
+
+See how is it going:
+tail -f log.txt
+
+---Provenance SPARQL LinkLion:
+select ?dump ?framework ?version ?algo where {
+?framework <http://usefulinc.com/ns/doap#release> ?version .
+?algo prov:wasAssociatedWith ?version .
+?mapping prov:wasGeneratedBy ?algo .
+?mapping llont:storedAt ?dump
+}
