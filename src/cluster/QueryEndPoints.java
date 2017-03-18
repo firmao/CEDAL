@@ -121,10 +121,4 @@ public class QueryEndPoints {
 
 		return ret;
 	}
-	
-	public static void readFile(File file) throws IOException{
-		
-		Files.lines(Paths.get("text.txt")).collect(Collectors.toList());
-		
-	}
 }
