@@ -33,7 +33,7 @@ public class QueryEndPoints {
 				connection.setRequestMethod("HEAD");
 				int responseCode = connection.getResponseCode();
 				if (responseCode == 200) {
-					if(canQueryEndPoint(url))
+					//if(canQueryEndPoint(url))
 						goodURLs.add(url);
 				}
 
