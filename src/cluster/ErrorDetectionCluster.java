@@ -69,24 +69,30 @@ public class ErrorDetectionCluster {
 		return dsName;
 	}
 
+	/**
+	 * FIXME commented because of a bug in Eclipse: https://bugs.eclipse.org/bugs/show_bug.cgi?id=432682
+	 *  
+	 * @param map
+	 * @throws IOException
+	 */
 	private static void printErrors(Map<String, String> map) throws IOException {
-		Map<String, ArrayList<String>> reverseMap = new HashMap<>(map.entrySet().stream()
-				.collect(Collectors.groupingBy(Map.Entry::getValue)).values().stream()
-				.collect(Collectors.toMap(item -> item.get(0).getValue(),
-						item -> new ArrayList<>(item.stream().map(Map.Entry::getKey).collect(Collectors.toList())))));
-
-		// System.out.println(reverseMap);
-
-		for (Map.Entry<String, ArrayList<String>> entry : reverseMap.entrySet()) {
-			List<String> lstValues = entry.getValue();
-			String key = entry.getKey();
-			if (lstValues.size() > 1) {
-				String line = key + "\t" + reverseMap.get(key);
-				try{
-				lstReport.add(line);
-				}catch(Exception ex){}
-			}
-		}
+//		Map<String, ArrayList<String>> reverseMap = new HashMap<>(map.entrySet().stream()
+//				.collect(Collectors.groupingBy(Map.Entry::getValue)).values().stream()
+//				.collect(Collectors.toMap(item -> item.get(0).getValue(),
+//						item -> new ArrayList<>(item.stream().map(Map.Entry::getKey).collect(Collectors.toList())))));
+//
+//		// System.out.println(reverseMap);
+//
+//		for (Map.Entry<String, ArrayList<String>> entry : reverseMap.entrySet()) {
+//			List<String> lstValues = entry.getValue();
+//			String key = entry.getKey();
+//			if (lstValues.size() > 1) {
+//				String line = key + "\t" + reverseMap.get(key);
+//				try{
+//				lstReport.add(line);
+//				}catch(Exception ex){}
+//			}
+//		}
 	}
 
 	public static long getTriples(String fileName) {

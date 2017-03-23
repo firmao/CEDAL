@@ -6,3 +6,4 @@
 .settings/
 
 pellet_*
+.DS_Store
