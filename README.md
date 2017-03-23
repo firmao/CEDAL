@@ -11,13 +11,11 @@ Command line:
 java -Xmx128G -jar runCEDAL.jar dirLinks
 ```
 
-where `dirLinks` is the directory where the knownledge base files (linkset files, dump files) are located.
+where `dirLinks` is the directory where the knownledge base files (linkset files, dump files) are located in.
 
 ## Additional content
 
 * [LinkLion](http://www.linklion.org/)
 * [Dump files from LinkLion without duplicates](https://www.dropbox.com/s/m24xoxzm0h60ywl/correct.tar.gz?dl=1)
 * [Output sample from CEDAL](http://tinyurl.com/100SampleCEDAL)
-* [Experiment Results](http://tinyurl.com/resultsLinkLion)
 * [File listing the datasets and knowledge base files without errors](http://tinyurl.com/cedalresults)
-* [Closure generator](http://tinyurl.com/closureGenerator)
