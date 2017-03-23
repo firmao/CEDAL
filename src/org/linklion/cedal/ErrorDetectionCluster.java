@@ -1,4 +1,4 @@
-package cluster;
+package org.linklion.cedal;
 
 import java.io.IOException;
 import java.io.PrintWriter;

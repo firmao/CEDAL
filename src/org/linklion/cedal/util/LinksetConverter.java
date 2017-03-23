@@ -1,4 +1,4 @@
-package util;
+package org.linklion.cedal.util;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;

@@ -1,4 +1,4 @@
-package cluster;
+package org.linklion.cedal;
 
 import java.io.File;
 import java.io.FileNotFoundException;

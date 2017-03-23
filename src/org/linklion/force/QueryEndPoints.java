@@ -1,4 +1,4 @@
-package endpoints;
+package org.linklion.force;
 
 import java.io.File;
 import java.io.IOException;

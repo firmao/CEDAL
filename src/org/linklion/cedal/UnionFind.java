@@ -1,4 +1,4 @@
-package cluster;
+package org.linklion.cedal;
 
 import java.util.HashMap;
 import java.util.HashSet;
