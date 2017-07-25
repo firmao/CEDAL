@@ -1,24 +1,11 @@
-File,Dataset,ClusterError,Errors,Score
-npg-core-any-linkset.nq.nt,schema.org,"[http://dbpedia.org/ontology/Agent, http://xmlns.com/foaf/0.1/Agent, http://purl.org/dc/terms/Agent, http://www.cidoc-crm.org/cidoc-crm/E39_Actor, http://www.w3.org/2006/vcard/ns#Agent]",5,10
-npg-core-any-linkset.nq.nt,schema.org,"[http://purl.org/ontology/bibo/Event, http://schema.org/Event, http://www.cidoc-crm.org/cidoc-crm/E2_Temporal_Entity, http://purl.org/NET/c4dm/event.owl#Event]",4,6
-npg-core-any-linkset.nq.nt,schema.org,"[http://dbpedia.org/ontology/Organisation, http://xmlns.com/foaf/0.1/Organization, http://schema.org/Organization, http://www.cidoc-crm.org/cidoc-crm/E40_Legal_Body]",4,6
-npg-core-any-linkset.nq.nt,schema.org,"[http://schema.org/Article, http://purl.org/ontology/bibo/Article, http://purl.obolibrary.org/obo/IAO_0000013, http://purl.org/spar/fabio/Article]",4,6
-npg-core-any-linkset.nq.nt,schema.org,"[http://purl.org/ontology/bibo/Website, http://schema.org/WebSite, http://purl.org/spar/fabio/WebSite, http://dbpedia.org/ontology/Website]",4,6
-npg-core-any-linkset.nq.nt,schema.org,"[http://purl.org/spar/fabio/Image, http://www.cidoc-crm.org/cidoc-crm/E38_Image, http://dbpedia.org/ontology/Image, http://xmlns.com/foaf/0.1/Image]",4,6
-npg-core-any-linkset.nq.nt,schema.org,"[http://purl.org/ontology/bibo/Document, http://dbpedia.org/ontology/Document, http://xmlns.com/foaf/0.1/Document, http://www.cidoc-crm.org/cidoc-crm/E31_Document]",4,6
-npg-core-any-linkset.nq.nt,schema.org,"[http://www.cidoc-crm.org/cidoc-crm/E21_Person, http://schema.org/Person, http://dbpedia.org/ontology/Person, http://xmlns.com/foaf/0.1/Person]",4,6
-npg-core-any-linkset.nq.nt,schema.org,"[http://vivoweb.org/ontology/core#Dataset, http://purl.org/spar/fabio/Dataset, http://schema.org/Dataset]",3,3
-npg-core-any-linkset.nq.nt,schema.org,"[http://schema.org/Periodical, http://purl.org/spar/fabio/Periodical, http://purl.org/ontology/bibo/Periodical]",3,3
-npg-core-any-linkset.nq.nt,schema.org,"[http://vivoweb.org/ontology/core#Blog, http://purl.org/spar/fabio/Blog, http://schema.org/Blog]",3,3
-npg-core-any-linkset.nq.nt,schema.org,"[http://vivoweb.org/ontology/core#BlogPosting, http://schema.org/BlogPosting, http://purl.org/spar/fabio/BlogPost]",3,3
-npg-core-any-linkset.nq.nt,schema.org,"[http://purl.org/ontology/bibo/Journal, http://dbpedia.org/ontology/AcademicJournal, http://purl.org/spar/fabio/Journal]",3,3
-npg-core-any-linkset.nq.nt,schema.org,"[http://www.w3.org/2006/vcard/ns#Type, http://www.cidoc-crm.org/cidoc-crm/E55_Type, http://dbpedia.org/ontology/Type]",3,3
-npg-core-any-linkset.nq.nt,schema.org,"[http://schema.org/PublicationIssue, http://purl.org/spar/fabio/JournalIssue, http://purl.org/ontology/bibo/Issue]",3,3
-npg-core-any-linkset.nq.nt,schema.org,"[http://www.w3.org/2004/02/skos/core#Concept, http://www.cidoc-crm.org/cidoc-crm/E28_Conceptual_Object]",2,1
-npg-core-any-linkset.nq.nt,schema.org,"[http://purl.org/spar/fabio/Expression, http://www.cidoc-crm.org/cidoc-crm/E73_Information_Object]",2,1
-npg-core-any-linkset.nq.nt,schema.org,"[http://purl.org/spar/fabio/Abstract, http://vivoweb.org/ontology/core#Abstract]",2,1
-npg-core-any-linkset.nq.nt,schema.org,"[http://purl.org/spar/fabio/ExpressionCollection, http://purl.org/ontology/bibo/Collection]",2,1
-npg-core-any-linkset.nq.nt,schema.org,"[http://vivoweb.org/ontology/core#Publisher, http://dbpedia.org/ontology/Publisher]",2,1
-npg-journals-dbpedia-linkset.nq.nt,dbpedia.org,"[http://dbpedia.org/resource/Nature_Structural_and_Molecular_Biology, http://dbpedia.org/resource/Nature_Structural_&_Molecular_Biology]",2,1
-npg-journals-dbpedia-linkset.nq.nt,dbpedia.org,"[http://dbpedia.org/resource/Cell_Death_&_Differentiation, http://dbpedia.org/resource/Cell_Death_and_Differentiation]",2,1
-npg-journals-dbpedia-linkset.nq.nt,dbpedia.org,"[http://dbpedia.org/resource/Nature_Clinical_Practice_Gastroenterology_&_Hepatology, http://dbpedia.org/resource/Nature_Reviews_Gastroenterology_&_Hepatology]",2,1
+File	Dataset	ClusterError	Errors	Score	Type
+npg-core-any-linkset.nq.nt---purl.org.nt	purl.org	[http://purl.org/ontology/bibo/Article, http://purl.org/spar/fabio/Article]	2	1	
+npg-core-any-linkset.nq.nt---purl.org.nt	purl.org	[http://purl.org/spar/fabio/JournalIssue, http://purl.org/ontology/bibo/Issue]	2	1	
+npg-core-any-linkset.nq.nt---purl.org.nt	purl.org	[http://purl.org/spar/fabio/ExpressionCollection, http://purl.org/ontology/bibo/Collection]	2	1	
+npg-journals-dbpedia-linkset.nq.nt---dbpedia.org.nt	dbpedia.org	[http://dbpedia.org/resource/Nature_Clinical_Practice_Gastroenterology_&_Hepatology, http://dbpedia.org/resource/Nature_Reviews_Gastroenterology_&_Hepatology]	2	1	1
+npg-core-any-linkset.nq.nt---purl.org.nt	purl.org	[http://purl.org/ontology/bibo/Event, http://purl.org/NET/c4dm/event.owl#Event]	2	1	
+npg-core-any-linkset.nq.nt---purl.org.nt	purl.org	[http://purl.org/spar/fabio/Periodical, http://purl.org/ontology/bibo/Periodical]	2	1	
+npg-core-any-linkset.nq.nt---purl.org.nt	purl.org	[http://purl.org/ontology/bibo/Journal, http://purl.org/spar/fabio/Journal]	2	1	
+npg-journals-dbpedia-linkset.nq.nt---dbpedia.org.nt	dbpedia.org	[http://dbpedia.org/resource/Cell_Death_&_Differentiation, http://dbpedia.org/resource/Cell_Death_and_Differentiation]	2	1	2
+npg-core-any-linkset.nq.nt---purl.org.nt	purl.org	[http://purl.org/ontology/bibo/Website, http://purl.org/spar/fabio/WebSite]	2	1	
+npg-journals-dbpedia-linkset.nq.nt---dbpedia.org.nt	dbpedia.org	[http://dbpedia.org/resource/Nature_Structural_and_Molecular_Biology, http://dbpedia.org/resource/Nature_Structural_&_Molecular_Biology]	2	1	2
