@@ -1,0 +1,12 @@
+File	Dataset	ClusterError	Errors	Score	Type
+npg-core-any-linkset.nq.nt---purl.org.nt	purl.org	[http://purl.org/ontology/bibo/Article, http://purl.org/spar/fabio/Article]	2	1	
+npg-core-any-linkset.nq.nt---purl.org.nt	purl.org	[http://purl.org/spar/fabio/JournalIssue, http://purl.org/ontology/bibo/Issue]	2	1	
+npg-core-any-linkset.nq.nt---purl.org.nt	purl.org	[http://purl.org/spar/fabio/ExpressionCollection, http://purl.org/ontology/bibo/Collection]	2	1	
+npg-journals-dbpedia-linkset.nq.nt---dbpedia.org.nt	dbpedia.org	[http://dbpedia.org/resource/Nature_Clinical_Practice_Gastroenterology_&_Hepatology, http://dbpedia.org/resource/Nature_Reviews_Gastroenterology_&_Hepatology]	2	1	1
+npg-core-any-linkset.nq.nt---purl.org.nt	purl.org	[http://purl.org/ontology/bibo/Event, http://purl.org/NET/c4dm/event.owl#Event]	2	1	
+npg-core-any-linkset.nq.nt---purl.org.nt	purl.org	[http://purl.org/spar/fabio/Periodical, http://purl.org/ontology/bibo/Periodical]	2	1	
+npg-core-any-linkset.nq.nt---purl.org.nt	purl.org	[http://purl.org/ontology/bibo/Journal, http://purl.org/spar/fabio/Journal]	2	1	
+npg-journals-dbpedia-linkset.nq.nt---dbpedia.org.nt	dbpedia.org	[http://dbpedia.org/resource/Cell_Death_&_Differentiation, http://dbpedia.org/resource/Cell_Death_and_Differentiation]	2	1	2
+npg-core-any-linkset.nq.nt---purl.org.nt	purl.org	[http://purl.org/ontology/bibo/Website, http://purl.org/spar/fabio/WebSite]	2	1	
+npg-journals-dbpedia-linkset.nq.nt---dbpedia.org.nt	dbpedia.org	[http://dbpedia.org/resource/Nature_Structural_and_Molecular_Biology, http://dbpedia.org/resource/Nature_Structural_&_Molecular_Biology]	2	1	2
+
