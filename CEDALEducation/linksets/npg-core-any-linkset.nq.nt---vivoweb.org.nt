@@ -1,0 +1,5 @@
+<http://ns.nature.com/terms/Dataset> <http://www.w3.org/2002/07/owl#equivalentClass> <http://vivoweb.org/ontology/core#Dataset> .
+<http://ns.nature.com/terms/BlogPost> <http://www.w3.org/2002/07/owl#equivalentClass> <http://vivoweb.org/ontology/core#BlogPosting> .
+<http://ns.nature.com/terms/Blog> <http://www.w3.org/2002/07/owl#equivalentClass> <http://vivoweb.org/ontology/core#Blog> .
+<http://ns.nature.com/terms/Abstract> <http://www.w3.org/2002/07/owl#equivalentClass> <http://vivoweb.org/ontology/core#Abstract> .
+<http://ns.nature.com/terms/Publisher> <http://www.w3.org/2002/07/owl#equivalentClass> <http://vivoweb.org/ontology/core#Publisher> .

@@ -1,0 +1,5 @@
+<http://ns.nature.com/terms/Person> <http://www.w3.org/2002/07/owl#equivalentClass> <http://xmlns.com/foaf/0.1/Person> .
+<http://ns.nature.com/terms/Agent> <http://www.w3.org/2002/07/owl#equivalentClass> <http://xmlns.com/foaf/0.1/Agent> .
+<http://ns.nature.com/terms/Image> <http://www.w3.org/2002/07/owl#equivalentClass> <http://xmlns.com/foaf/0.1/Image> .
+<http://ns.nature.com/terms/Document> <http://www.w3.org/2002/07/owl#equivalentClass> <http://xmlns.com/foaf/0.1/Document> .
+<http://ns.nature.com/terms/Organization> <http://www.w3.org/2002/07/owl#equivalentClass> <http://xmlns.com/foaf/0.1/Organization> .
