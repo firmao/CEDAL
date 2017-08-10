@@ -23,4 +23,4 @@ where `dirLinks` is the directory where the knownledge base files (linkset files
 
 ## Contact:
 * André Valdestilhas
-valdestilhas@informatik.uni-leipzig.de
+** valdestilhas@informatik.uni-leipzig.de
