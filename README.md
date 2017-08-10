@@ -20,3 +20,7 @@ where `dirLinks` is the directory where the knownledge base files (linkset files
 * [Output sample from CEDAL](http://tinyurl.com/100SampleCEDAL)
 * [File listing the datasets and knowledge base files without errors](http://tinyurl.com/cedalresults)
 * [CEDAL applied to educational LinkSets](https://github.com/firmao/CEDAL/tree/master/CEDALEducation)
+
+## Contact:
+* André Valdestilhas
+valdestilhas@informatik.uni-leipzig.de
