@@ -25,3 +25,6 @@ where `dirLinks` is the directory where the knownledge base files (linkset files
 * André Valdestilhas
 
 valdestilhas@informatik.uni-leipzig.de
+
+## License:
+Licensed under AGPL.
