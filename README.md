@@ -23,6 +23,8 @@ where `dirLinks` is the directory where the knownledge base files (linkset files
 
 ## Contact:
 * André Valdestilhas
+* paper: https://dl.acm.org/citation.cfm?id=3106497
+* svn(AKSW): https://svn.aksw.org/papers/2017/WI_CEDAL/public.pdf 
 
 valdestilhas@informatik.uni-leipzig.de
 
