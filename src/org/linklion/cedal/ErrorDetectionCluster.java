@@ -1,7 +1,10 @@
-package org.linklion.cedal;
+package cluster;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -13,6 +16,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
+import util.CleanLinkSets;
 
 public class ErrorDetectionCluster {
 
@@ -29,17 +34,19 @@ public class ErrorDetectionCluster {
 		for (Set<String> value : clusters.values()) {
 			getAnalysis(value);
 		}
+		printDatasetNoErrors();
 	}
 
 	public static void createReport(Set<String> pLstReport, String dir) throws IOException {
 		String fileName = "erroReport_" + dir + "_parallel.csv";
 		PrintWriter writer = new PrintWriter(fileName, "UTF-8");
-		writer.println("File" + "\t" + "Dataset" + "\t" + "ClusterError");
+		writer.println("File" + "\t" + "Dataset" + "\t" + "ClusterError" + "\t" + "Errors" + "\t" + "Score");
 		for (String line : pLstReport) {
 			writer.println(line);
 		}
 		writer.close();
 		TSVReader.analisysTop(fileName);
+		CleanLinkSets.cleanLinksets(new File(fileName), new File(dir), dir + "_Fixed");
 	}
 	
 	public static void createReport_old(Set<String> pLstReport, String dir) throws IOException {
@@ -69,30 +76,52 @@ public class ErrorDetectionCluster {
 		return dsName;
 	}
 
-	/**
-	 * FIXME commented because of a bug in Eclipse: https://bugs.eclipse.org/bugs/show_bug.cgi?id=432682
-	 *  
-	 * @param map
-	 * @throws IOException
-	 */
 	private static void printErrors(Map<String, String> map) throws IOException {
-//		Map<String, ArrayList<String>> reverseMap = new HashMap<>(map.entrySet().stream()
-//				.collect(Collectors.groupingBy(Map.Entry::getValue)).values().stream()
-//				.collect(Collectors.toMap(item -> item.get(0).getValue(),
-//						item -> new ArrayList<>(item.stream().map(Map.Entry::getKey).collect(Collectors.toList())))));
-//
-//		// System.out.println(reverseMap);
-//
-//		for (Map.Entry<String, ArrayList<String>> entry : reverseMap.entrySet()) {
-//			List<String> lstValues = entry.getValue();
-//			String key = entry.getKey();
-//			if (lstValues.size() > 1) {
-//				String line = key + "\t" + reverseMap.get(key);
-//				try{
-//				lstReport.add(line);
-//				}catch(Exception ex){}
-//			}
-//		}
+		Map<String, ArrayList<String>> reverseMap = new HashMap(map.entrySet().stream()
+				.collect(Collectors.groupingBy(Map.Entry::getValue)).values().stream()
+				.collect(Collectors.toMap(item -> item.get(0).getValue(),
+						item -> new ArrayList<>(item.stream().map(Map.Entry::getKey).collect(Collectors.toList())))));
+
+		// System.out.println(reverseMap);
+
+		for (Map.Entry<String, ArrayList<String>> entry : reverseMap.entrySet()) {
+			List<String> lstValues = entry.getValue();
+			String key = entry.getKey();
+			if (lstValues.size() > 1) {
+				int score = (lstValues.size() * (lstValues.size() - 1)) / 2;
+				String line = key + "\t" + reverseMap.get(key) + "\t" + lstValues.size() + "\t" + score;
+				try{
+				lstReport.add(line);
+				
+				//ClosureGeneratorCluster.datasets.remove(reverseMap.get(key));
+				String [] str = key.split("\t");
+				String fName = str[0];
+				String dataset = str[1];
+				ClosureGeneratorCluster.allGoodFiles.remove(fName);
+				ClosureGeneratorCluster.allGoodDatasets.remove(dataset);
+				
+				}catch(Exception ex){}
+			}
+		}
+		try{
+			printDatasetNoErrors();
+		}catch(Exception e){}
+	}
+
+	private static void printDatasetNoErrors() throws FileNotFoundException, UnsupportedEncodingException {
+		PrintWriter writer = new PrintWriter("GoodDFilesAndDataSets.txt", "UTF-8");
+		
+		int numGoodFiles = ClosureGeneratorCluster.allGoodFiles.size();
+		int numGoodDatasets = ClosureGeneratorCluster.allGoodDatasets.size();
+		
+		writer.println("Number of good Linkset files: " + numGoodFiles);
+		writer.println("Number of good Datasets: " + numGoodDatasets);
+		writer.println("#######");
+		writer.println("Good Linkset files: " + ClosureGeneratorCluster.allGoodFiles);
+		writer.println("#######");
+		writer.println("good Datasets: " + ClosureGeneratorCluster.allGoodDatasets);
+		
+		writer.close();
 	}
 
 	public static long getTriples(String fileName) {
