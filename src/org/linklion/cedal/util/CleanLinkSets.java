@@ -24,7 +24,7 @@ public class CleanLinkSets {
 		cleanLinksets(fErrors, dirLinkset, newLinksetDir);
 	}
 
-	private static void cleanLinksets(File fErrors, File dirLinkset, String newLinksetDir) {
+	public static void cleanLinksets(File fErrors, File dirLinkset, String newLinksetDir) {
 		File fNewLinksetDir = new File(newLinksetDir);
 		fNewLinksetDir.mkdir();
 		Map<String, Set<String>> mErrors = readFile(fErrors);
