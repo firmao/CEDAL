@@ -11,10 +11,16 @@ java -Xmx128G -jar runclustersGood.jar > log.txt &
 See how is it going:
 tail -f log.txt
 
----Provenance SPARQL LinkLion:
+#---Provenance SPARQL LinkLion:
 select ?dump ?framework ?version ?algo where {
 ?framework <http://usefulinc.com/ns/doap#release> ?version .
 ?algo prov:wasAssociatedWith ?version .
 ?mapping prov:wasGeneratedBy ?algo .
 ?mapping llont:storedAt ?dump
+}
+
+#---Link Types LinkLion
+Select distinct ?p where {
+?type rdf:type <http://www.linklion.org/ontology#Link> .
+?type <http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate> ?p .
 }
